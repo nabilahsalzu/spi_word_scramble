@@ -19,7 +19,7 @@ int main()
         {
             case 1:
                 printf("\n\tWord Scramble Puzzle Game!\n");
-                printf("==========================================\n\n");
+                printf("==========================================\n");
                 new_game(); // returns here after game ends
                 break;
 
