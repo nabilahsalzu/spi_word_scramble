@@ -26,7 +26,7 @@ void exit_game()
 {
     printf("================== Exit ==================\n");
     printf("> Thank you for playing\n");
-    printf("> The game will Close\n");
+    printf("> The game will Close\n\n");
     exit(0);
 }
 

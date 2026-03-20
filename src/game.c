@@ -4,7 +4,7 @@
 #include <time.h>
 #include "game.h"
 
-#define MAX_WORDS 5
+#define MAX_WORDS 70
 #define MAX_LENGTH 20
 
 void new_game()
