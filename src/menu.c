@@ -4,14 +4,14 @@
 
 void display_menu(int *user_entry)
 {
-    printf("\n===== WELCOME TO WORD SCRAMBLE GAME! =====\n\n");
+    printf("\n      WELCOME TO WORD SCRAMBLE GAME!\n");
+    printf("\n==========================================\n\n");
     printf("\t1. New Game\n");
     printf("\t2. Help\n");
     printf("\t3. Exit\n\n");
 
     printf("\tChoose : ");
     scanf(" %d", user_entry);
-    printf("\n==========================================\n\n");
 }
 
 void show_help()

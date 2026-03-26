@@ -17,7 +17,7 @@ void new_game()
         return;
     }
 
-    // READ WORDS AND STORE IN ARRAY
+    // READ WORDS
     char words[MAX_WORDS][MAX_LENGTH];
     int count = 0;
     while (count < MAX_WORDS && fscanf(file, "%24s", words[count]) == 1)
@@ -25,8 +25,6 @@ void new_game()
         count++;
     }
 
-    
-    // CLOSE FILE
     fclose(file);
 
     if (count == 0)
@@ -35,8 +33,10 @@ void new_game()
         return;
     }
 
-    // SHUFFLE WORDS (different order for each game)
+    // SHUFFLE WORDS
     int i;
+    int lives = 3;
+
     for (i = count - 1; i > 0; i--)
     {
         int j = rand() % (i + 1);
@@ -46,16 +46,31 @@ void new_game()
         strcpy(words[j], temp);
     }
 
-    // LOOP THROUGH ALL WORDS
+    // LOOP THROUGH LIMITED QUESTIONS
     for (i = 0; i < count; i++)
     {
+        if (lives == 0)
+        {
+            printf("\nGAME OVER! You've run out of lives.\n");
+            printf("\n==========================================\n");
+            return;
+        }
+
+        // 🔥 NEW: Show lives
+        printf("\nLives: ");
+        for (int j = 0; j < lives; j++)
+        {
+            printf("❤️ ");
+        }
+        printf("\n");
+
         char OriginalWord[MAX_LENGTH];
         strcpy(OriginalWord, words[i]);
 
         char ScrambledWord[MAX_LENGTH];
         strcpy(ScrambledWord, OriginalWord);
 
-        scramble_word(ScrambledWord); // robust shuffle
+        scramble_word(ScrambledWord);
 
         printf("\nScrambled word: %s\n", ScrambledWord);
 
@@ -69,13 +84,24 @@ void new_game()
             return;
         }
 
-        if (!check_answer(PlayerGuess, OriginalWord))
+        // 🔥 MODIFIED: Use lives instead of immediate exit
+        if (check_answer(PlayerGuess, OriginalWord))
         {
-            return;
+            // already prints "Correct!" inside function
         }
+        else
+        {
+            lives--;
+            printf("You have %d lives left.\n", lives);
+        }
+        printf("\n==========================================\n");
     }
 
-    printf("Congratulations! You finished all the words.\n");
+    // FINAL MESSAGE
+    if (lives > 0)
+    {
+        printf("\n🎉 Congratulations! You finished all questions!\n");
+    }
 }
 
 // ROBUST SCRAMBLE FUNCTION (Fisher–Yates)
@@ -109,7 +135,6 @@ int check_answer(char user_guess[], char original_word[])
     else
     {
         printf("Wrong! The correct word was: %s\n", original_word);
-        printf("GAME OVER\n");
         return 0;
     }
 }

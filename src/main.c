@@ -18,8 +18,7 @@ int main()
         switch(user_entry)
         {
             case 1:
-                printf("\n\tWord Scramble Puzzle Game!\n");
-                printf("==========================================\n");
+                printf("\n============= Scramble Times =============\n");
                 new_game(); // returns here after game ends
                 break;
 
