@@ -36,6 +36,7 @@ void new_game()
     // SHUFFLE WORDS
     int i;
     int lives = 3;
+    int score = 0;
 
     for (i = count - 1; i > 0; i--)
     {
@@ -46,23 +47,22 @@ void new_game()
         strcpy(words[j], temp);
     }
 
-    // LOOP THROUGH LIMITED QUESTIONS
     for (i = 0; i < count; i++)
     {
         if (lives == 0)
         {
             printf("\nGAME OVER! You've run out of lives.\n");
+            printf ("Your score is %d", score);
             printf("\n==========================================\n");
             return;
         }
 
-        // 🔥 NEW: Show lives
         printf("\nLives: ");
         for (int j = 0; j < lives; j++)
         {
             printf("❤️ ");
         }
-        printf("\n");
+        printf("\tScores: %d\n", score);
 
         char OriginalWord[MAX_LENGTH];
         strcpy(OriginalWord, words[i]);
@@ -84,20 +84,18 @@ void new_game()
             return;
         }
 
-        // 🔥 MODIFIED: Use lives instead of immediate exit
-        if (check_answer(PlayerGuess, OriginalWord))
+        if (check_answer(PlayerGuess, OriginalWord))  // Correct
         {
-            // already prints "Correct!" inside function
+            score += 10; // increase score
         }
-        else
+        else  // Wrong
         {
-            lives--;
-            printf("You have %d lives left.\n", lives);
+            lives--; // lose a life
         }
+
         printf("\n==========================================\n");
     }
 
-    // FINAL MESSAGE
     if (lives > 0)
     {
         printf("\n🎉 Congratulations! You finished all questions!\n");
