@@ -20,7 +20,7 @@ void new_game()
         return;
     }
 
-    // READ WORDS
+    // READ WORDS INTO ARRAY
     char words[MAX_WORDS][MAX_LENGTH];
     int count = 0;
     while (count < MAX_WORDS && fscanf(file, "%24s", words[count]) == 1)
@@ -28,6 +28,7 @@ void new_game()
         count++;
     }
 
+    // CLOSE FILE
     fclose(file);
 
     if (count == 0)
@@ -60,7 +61,6 @@ void new_game()
             return;
         }
 
-        // ✅ ADD THIS BLOCK HERE
         char OriginalWord[MAX_LENGTH];
         strcpy(OriginalWord, words[i]);
 
@@ -72,7 +72,8 @@ void new_game()
         char PlayerGuess[MAX_LENGTH];
 
         printf("\nLives: ");
-        for (int j = 0; j < lives; j++)
+        int j;
+        for (j = 0; j < lives; j++)
         {
             printf("❤️ ");
         }
@@ -81,7 +82,7 @@ void new_game()
         printf("------------------------------------------\n");
         printf("Scrambled word: %s\n", ScrambledWord);
 
-        printf("Your guess (10s / type END): ");
+        printf("Your guess (type END to quit): ");
         fflush(stdout);
 
         int got_input = timed_input(PlayerGuess, 10);
@@ -189,13 +190,13 @@ int timed_input(char input[], int time_limit)
             input[read_bytes] = '\0';
         }
 
-        return 1; // success
+        return 1;
     }
     else
     {
         printf("\n⏰ Time's up!\n");
         input[0] = '\0';
-        return 0; // timeout
+        return 0;
     }
 }
 
