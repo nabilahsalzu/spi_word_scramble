@@ -20,7 +20,7 @@ void show_help()
     printf("================== Help ==================\n\n");
     printf("> Use keyboard to play the game\n");
     printf("> Follow the instruction shown in game New\n");
-    printf("> Try to get the highest score\n");
+    printf("> Try to get the highest score");
 }
 
 void exit_game()
